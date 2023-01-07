@@ -51,6 +51,7 @@
                 current_down();
                 slide();
                 handle_slide_show(true);
+                handle_date();
                 if(current === min) { ///deactivate the arrow
                     arrow_deactivation(left_arrow);
                     return;
@@ -63,6 +64,7 @@
             current_up();
             slide();
             handle_slide_show(false);
+            handle_date();
             if(current === max) { ///deactivate the arrow
                 arrow_deactivation(right_arrow);
                 return;
@@ -80,7 +82,42 @@
             document.getElementById(`circle-${current - 1}`).classList.add("fill");
             document.getElementById(`circle-${current}`).classList.add("fill-2");
             document.getElementById(`line-${current - 1}`).classList.add("fill");
-            
+        }
+
+        function handle_date() {
+            let ids = ["date-decade-1", "date-decade-2", "date-unit-1", "date-unit-2", "date-unit-3"]
+            switch(current) {
+            case 0:
+                /*for(let i = 0; i < ids.length; i++) {
+                    document.getElementById(ids[i]).style.transform = "translate(0%)";
+                }*/
+                document.getElementById("date-decade-1").classList.add("display");
+                document.getElementById("date-decade-2").classList.remove("display");
+                document.getElementById("date-unit-1").classList.add("display");
+                document.getElementById("date-unit-2").classList.remove("display");
+                document.getElementById("date-unit-3").classList.remove("display");
+                break;
+            case 1:
+                /*for(let i = 0; i < ids.length; i++) {
+                    document.getElementById(ids[i]).style.transform = "translate(-100%)";
+                }*/
+                document.getElementById("date-decade-1").classList.remove("display");
+                document.getElementById("date-decade-2").classList.add("display");
+                document.getElementById("date-unit-1").classList.remove("display");
+                document.getElementById("date-unit-2").classList.add("display");
+                document.getElementById("date-unit-3").classList.remove("display");
+                break;
+            case 2: 
+                /*for(let i = 2; i < ids.length; i++) {
+                    document.getElementById(ids[i]).style.transform = "translate(-200%)";
+                }*/
+                document.getElementById("date-unit-1").classList.remove("display");
+                document.getElementById("date-unit-2").classList.remove("display");
+                document.getElementById("date-unit-3").classList.add("display");
+                break;
+            default:
+                break;
+            }
         }
     </script>
     <div class="viewport">
@@ -119,8 +156,8 @@
                     </div>
                     <div class="date-slider">
                         <p id="date-unit-1" class="display">7</p>
-                        <p id="date-unit-1">0</p>
-                        <p id="date-unit-1">3</p>
+                        <p id="date-unit-2">0</p>
+                        <p id="date-unit-3">3</p>
                     </div>
                 </div>
             </div>

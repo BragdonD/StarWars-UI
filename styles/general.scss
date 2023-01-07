@@ -1,6 +1,6 @@
 @use "./font.scss";
 
-$max-width: 75%;
+$max-width: 80%;
 $max-width-px: 1400px;
 
 * { ///reset
@@ -129,17 +129,21 @@ h1, p {
 
 .date-slider {
     display: flex;
+    overflow: hidden;
 
     p {
+        transition: 
+            width 0.4s ease-in-out,
+            opacity 0.4s ease-in-out;
         font-size: 13em;
         font-family: font.$date-font !important;
         font-weight: 700;
         opacity: 0;
-        display: none;
+        width: 0;
 
         &.display {
+            width: auto;
             opacity: 1;
-            display: block;
         }
     }
 }
