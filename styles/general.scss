@@ -1,0 +1,252 @@
+@use "./font.scss";
+
+$max-width: 75%;
+$max-width-px: 1400px;
+
+* { ///reset
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #060447;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.viewport {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.left, .right {
+    display: flex;
+    flex-direction: column;
+    width: $max-width / 2;
+    max-width: $max-width-px / 2;
+}
+
+.right {
+    align-items: flex-end;
+}
+
+.left {
+    justify-content: space-between;
+}
+
+h1, p {
+    color: #FFF38A;
+    font-family: font.$normal-font;
+    width: 100%;
+}
+
+.image-slider {
+    width: 422px;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    img {
+        transition: 
+            transform 0.4s ease-in-out,
+            opacity 0.4s ease-in-out;
+        opacity: 0;
+
+        &.display {
+            flex-grow: 1;
+            opacity: 1;
+        }
+    }
+}
+
+.vector-slider, 
+.title-slider, 
+.text-slider {
+    display: flex;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    svg, h1, p {
+        flex-shrink: 0;
+        opacity: 0;
+        transition: 
+            transform 0.4s ease-in-out,
+            opacity 0.4s ease-in-out;
+        opacity: 0;
+        &.display {
+            opacity: 1;
+        }
+        margin-bottom: 20px;
+    }
+
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    p {
+        font-size: 1.2em;
+        line-height: 1.5em;
+        inline-size: 100%;
+        max-width: 500px;
+        &.display {
+            
+            overflow-wrap: break-word;
+        }
+    }
+}
+
+.date-slider-wrapper {
+    display: flex;
+    align-items: flex-end;
+    .unmovable {
+        p {
+            font-size: 13em;
+            font-family: font.$date-font !important;
+            font-weight: 700;
+            opacity: 1 !important;
+            display: block;
+        }
+    }
+}
+
+.date-slider {
+    display: flex;
+
+    p {
+        font-size: 13em;
+        font-family: font.$date-font !important;
+        font-weight: 700;
+        opacity: 0;
+        display: none;
+
+        &.display {
+            opacity: 1;
+            display: block;
+        }
+    }
+}
+
+.controls-wrapper {
+    margin-top: 50px;
+    width: $max-width;
+    max-width: $max-width-px;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    min-width: 130px;
+}
+
+.arrow-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 30px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.left-arrow, .right-arrow{
+    position: relative;
+    width: 50px;
+    height: 2px;
+    background-color: #FFF38A;
+    animation: arrow 700ms ease-in-out infinite;
+    scale: 0.7;
+    &::after, &::before {
+        content: '';
+        position: absolute;
+        width: 50%;
+        height: 3px;
+        right: -6px;
+        background-color: #FFF38A;
+    }
+      
+    &::after {
+        top: -8px;
+        transform: rotate(45deg);
+    }
+      
+    &::before {
+        top: 8px;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+        transform: rotate(-45deg);
+    }
+
+    &.deactivated {
+        background-color: #827B68;
+
+        &::after, &::before {
+            background-color: #827B68;
+        }
+    }
+}
+  
+.left-arrow {
+    transform: rotate(-180deg);
+}
+
+.slide-show {
+    display: flex;
+    flex-grow: 1;
+    max-width: 80%;
+    align-items: center;
+}
+
+.circle {
+    width: 36px;
+    height: 36px;
+    background-color: #827B68;
+    border-radius: 50px;
+    &.fill {
+        animation: fill 0.2s linear forwards;
+    }
+    &.fill-2 {
+        animation: fill 0.2s linear 0.4s forwards;
+    }
+}
+
+.line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #827B68;
+    &.fill {
+        animation: fill 0.2s linear 0.2s forwards;
+    }
+}
+
+@keyframes fill {
+    from {
+        background-color: #827B68;
+    }
+
+    to {
+        background-color: #FFF38A;
+    }
+}
